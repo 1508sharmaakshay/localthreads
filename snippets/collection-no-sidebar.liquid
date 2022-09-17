@@ -1,0 +1,47 @@
+<div class="collection-template collection-template-no-sidebar">
+
+  <div class="halo-collection-content">
+    <div class="bg-header-page">
+      <div class="container">
+
+        <div class="page-header text-center">
+          <h1>
+            {% include 'multilang' with collection.title %}
+          </h1>
+          <p>{{collection.description}}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class=filter-wrapper>
+      <div class="bg-filter">
+        <div class="container">
+            {% if settings.ss_enable %}
+            {%comment %}Searchspring Filters element{%endcomment %}
+              <div id="searchspring-sidebar"></div>
+          {% else %}
+              {% section 'filter-no-sidebar' %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% comment %} moved to sort line
+    <div class="container">
+      {% include 'breadcrumb' %}
+    </div>
+    {% endcomment %}
+
+    <div class="container">
+      {% if settings.ss_enable %}
+        {%comment %}Searchspring Results element{%endcomment %}
+        <div id="searchspring-content"></div>
+      {% else %}
+         {% section 'collection-template-no-sidebar' %}
+      {% endif %}
+
+      {% section 'recently-viewed-products' %}
+    </div>
+  </div>
+</div>

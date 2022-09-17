@@ -1,0 +1,38 @@
+{% if request.page_type == 'product' %}
+  {% comment %} unless ak_overwrite_product_ids contains product.id {% endcomment %}
+  {%- capture ak_meta_title -%}Buy {{ product.title }} | {{ product.vendor }} Online {{ shop.name }}
+{%- endcapture -%}
+  {%- capture ak_meta_description -%}Buy {{ product.title }} at affordable price: {{ product.price | money }}
+Shop {{ product.title }}  | Free Delivery |  Product is designed by {{ product.vendor }}. Best quality products. Hurry up!{%- endcapture -%}
+  {% comment %} endunless {% endcomment %}
+{% endif %}
+{% if request.page_type == 'collection' %}
+  {% comment %} unless ak_overwrite_collection_ids contains collection.id {% endcomment %}
+  {%- capture ak_meta_title -%}{{ collection.title }}{%- endcapture -%}
+  {%- capture ak_meta_description -%}Are you ready to welcome the latest {{ collection.title }} at {{ shop.name }}? {{ collection.title }} promises to bring you an extremely wonderful experience. Check it out now!{%- endcapture -%}
+  {% comment %} endunless {% endcomment %}
+{% endif %}
+{% if request.page_type == 'article' %}
+  {% comment %} unless ak_overwrite_article_ids contains article.id {% endcomment %}
+  {%- capture ak_meta_title -%}{{ article.title }}{%- endcapture -%}
+  {%- capture ak_meta_description -%}Update with the latest fashion trends with interesting information in {{ article.title }} at {{ shop.name }} right now! What are you waiting for?{%- endcapture -%}
+  {% comment %} endunless {% endcomment %}
+{% endif %}
+{% if ak_meta_title %}
+  {%- unless ak_meta_title contains 'Liquid error' -%}
+    {%- assign title = ak_meta_title | strip_html | strip -%}
+    {%- assign page_title = title -%}
+    {%- assign og_title = title -%}
+    <title>{{ og_title }}</title>
+    <meta property="og:title" content="{{ og_title }}">
+    <meta name="twitter:title" content="{{ og_title }}">
+  {%- endunless -%}
+{% endif %}
+{% if ak_meta_description %}
+  {%- unless ak_meta_description contains 'Liquid error' -%}
+    {%- assign page_description = ak_meta_description | strip_html | strip -%}
+    {%- assign og_description = page_description -%}
+    <meta property="og:description" content="{{ og_description }}">
+    <meta name="twitter:description" content="{{ og_description | truncate: 140 }}">
+  {%- endunless -%}
+{% endif %}

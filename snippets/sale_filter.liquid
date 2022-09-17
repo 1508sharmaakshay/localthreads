@@ -1,0 +1,19 @@
+    {% if settings.sale_filter %}
+      	{% assign title_lc = collection.title | downcase %}
+    	{% if title_lc contains 'sale' %}
+			
+			{% assign _skip = true %}
+
+			{% for var in product.variants %}
+				{% if var.price < var.compare_at_price %}
+                  {% assign _skip = false %}
+				  {% break %}
+				{% endif %}
+			{% endfor %}
+
+			{% if _skip %}
+				{% continue %}  {% comment %} --tim: skip this product in the outer [for product in collection.products] loop {% endcomment %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+    	

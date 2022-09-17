@@ -1,0 +1,2 @@
+(function(){var t,n,e,o,r=[].slice;t=(e=typeof require=="function"?require("countdown"):void 0)!=null?e:this.countdown,n=(o=typeof require=="function"?require("moment"):void 0)!=null?o:this.moment,n.fn.countdown=function(){var u,i;return i=arguments[0],u=2<=arguments.length?r.call(arguments,1):[],t.apply(null,[this.toDate(),n(i).toDate()].concat(r.call(u)))}}).call(this);
+//# sourceMappingURL=/s/files/1/0261/7871/5706/t/18/assets/mc.js.map?v=2682404522592915333

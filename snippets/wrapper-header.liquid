@@ -1,0 +1,195 @@
+<div class="countdown" style="display:none;">
+    <div id="countdown">
+        <span id="count-before">Order in the next </span><span id="time">00:00:00</span><span id="count-after"> and get same day shipping!</span>
+    </div>
+</div>
+
+<script type="text/javascript" src="{{ 'moment.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'timezone.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'data.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'mc.js' | asset_url }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+  <!--//--><![CDATA[// ><!--
+
+  (function() {
+    var start = moment('12:00:00 PM', 'HH:mm:ss A').tz('Australia/Queensland');
+    var formatedStartDate = start.format();
+
+    start = moment.duration(start).asSeconds();
+
+    var now = moment().tz('Australia/Queensland');
+    var formatedNowDate = now.format();
+
+    now = moment.duration(now).asSeconds();
+
+    var eventTime= start; 
+    var currentTime = now; 
+    var diffTime = eventTime - currentTime;
+    var duration = moment.duration(diffTime*1000, 'milliseconds');
+    var interval = 1000;
+    
+    setInterval(function(){
+      
+      duration = moment.duration(duration - interval, 'milliseconds');
+
+      if(duration.hours() <= 0 && duration.minutes() <= 0){
+        document.getElementById('countdown').innerHTML = 'Same day shipping before 12pm';
+        document.getElementById('countdown').style.display = "block";
+       
+      } else {
+        document.getElementById('time').innerHTML = pad(duration.hours()) + ":" + pad(duration.minutes()) + ":" + pad(duration.seconds());
+        document.getElementById('countdown').style.display = "block";
+      }
+
+    }, interval);
+
+    var myDate = new Date();
+    if(!(myDate.getDay() % 6)) {
+          var divsToHide = document.getElementsByClassName("countdown"); //divsToHide is an array
+          for(var i = 0; i < divsToHide.length; i++){
+              divsToHide[i].style.visibility = "hidden"; // or
+              divsToHide[i].style.display = "none"; // depending on what you're doing
+          }
+    }
+    
+    function pad(num) {
+      return ("0" + parseInt(num)).substr(-2);
+    }
+   
+  
+    
+    //scroll top and bottom
+    var lastScrollTop = 0;
+    jQuery(window).scroll(function(event){
+       var st = jQuery(this).scrollTop();
+       if (st > lastScrollTop){
+           // downscroll code
+          jQuery('.site-header').css('visibility','hidden');
+          //jQuery('.site-header').removeClass('site-header--opening');
+       } else {
+          // upscroll code
+          jQuery('.site-header').css('visibility','visible');
+//           if(!jQuery('.header-wrapper').hasClass('site-header--stuck')){
+//               jQuery('.site-header').addClass('site-header--stuck');
+// 	          jQuery('.site-header').addClass('site-header--opening');
+// 		  }
+       }
+       lastScrollTop = st;
+    });
+    
+  
+    jQuery(window).scroll(function(){
+		var scroll = jQuery(this).scrollTop();
+        if(scroll <= 150){
+          jQuery('.site-header').css('visibility','visible');
+ 		  //jQuery('.site-header').removeClass('site-header--stuck');
+          //jQuery('.site-header').removeClass('site-header--opening');
+		}
+	});
+	
+
+  })();     
+
+
+  //--><!]]>
+</script>
+<style>
+    .countdown #time, .countdown #time2 {
+        font-weight: bold;
+        padding: 0 7px;
+        font-size: 17px;
+    }
+    .countdown {
+        background: #0062A8;
+        color: #fff;
+        text-align: center;
+        padding: 7px 0;
+    }
+    .site-header--stuck .countdown {
+        	display:block;
+    }
+    
+    .countdown div#hellobar {
+      margin-top: 10px;
+      margin-bottom: -7px;
+    }
+
+    @media(max-width:722px){
+        
+        .countdown span#time {
+            font-size: 13px;
+        }
+        .countdown span {
+            font-size: 12px;
+        }
+    }
+</style>
+
+
+{% if settings.header_layout == 'default' %}
+<div class="wrapper-header wrapper_header_default">
+    {% section 'header' %}
+    {% section 'navigation' %}
+</div>
+
+{% elsif settings.header_layout == 'parallax' %}
+<div class="wrapper-header wrapper_header_parallax">
+    {% section 'header-parallax' %}
+</div>
+
+{% elsif settings.header_layout == '02' %}
+<div class="wrapper-header wrapper_header_02 header-lang-style2">
+    {% section 'header-02' %}
+    {% section 'navigation' %}
+</div>
+
+{% elsif settings.header_layout == '03' %}
+<div class="wrapper-header wrapper_header_03 header-lang-style2">
+    {% section 'header-03' %}
+    {% section 'navigation' %}
+</div>
+
+{% elsif settings.header_layout == '04' %}
+<div class="wrapper-header wrapper_header_04 header-lang-style2">
+    {% section 'header-04' %}
+</div>
+
+{% elsif settings.header_layout == 'vertical' %}
+<div class="wrapper-header wrapper_header_vertical">
+    {% section 'header-vertical' %}
+</div>
+
+{% elsif settings.header_layout == 'supermarket' %}
+<div class="wrapper-header wrapper_header_supermarket header-lang-style2">
+    {% section 'header-supermarket' %}
+    {% section 'navigation-supermarket' %}
+</div>
+{% endif %}
+
+{% unless bold_red_inited %}
+<style>
+/* --tim: bold and red links in drop-downs */
+  {% if settings.bold_links_list != blank %}
+    {% assign bold_list = linklists[ settings.bold_links_list ] %}
+    {% for link in  bold_list.links %}
+      .dropdown a[href="{{- link.url -}}"] {
+          font-weight: bold !important;
+      }
+    {% endfor %}
+  {% endif %}
+
+  {% if settings.red_links_list != blank %}
+    {% assign red_list = linklists[ settings.red_links_list ] %}
+    {% for link in  red_list.links %}
+      .dropdown a[href="{{- link.url -}}"] {
+          color: red;
+      }
+    {% endfor %}
+  {% endif %}
+  
+</style>  
+{% assign bold_red_inited = true %}
+{% endunless %}

@@ -1,0 +1,825 @@
+{% include 'style-footer-3' %}
+
+<footer class="site-footer footer-3" role="contentinfo">
+    {% if section.settings.display_footer_policies or section.blocks.size > 0 %}
+    <div class="footer-top">
+        <div class="container">
+            {% if section.settings.display_footer_policies %}
+            <div class="policies-block">
+                <div class="row policies-slider" data-policies-slider data-row="3"> 
+                    <div class="policy-item col-12 col-md-6 col-lg-4">
+                        <a href="{{ section.settings.link_1 }}" title="">
+                            {% if section.settings.icon_1 != blank %}
+                            <span class="policy-icon">
+                                {{ section.settings.icon_1 }}
+                            </span>
+                            {% endif %}
+
+                            <span class="policy-text">
+                                {% include 'multilang' with section.settings.text_1 %}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="policy-item col-12 col-md-6 col-lg-4">
+                        <a href="{{ section.settings.link_2 }}" title="">
+                            {% if section.settings.icon_2 != blank %}
+                            <span class="policy-icon">
+                                {{ section.settings.icon_2 }}
+                            </span>
+                            {% endif %}
+
+                            <span class="policy-text">
+                                {% include 'multilang' with section.settings.text_2 %}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="policy-item col-12 col-md-6 col-lg-4">
+                        <a href="{{ section.settings.link_3 }}" title="">
+                            {% if section.settings.icon_3 != blank %}
+                            <span class="policy-icon">
+                                {{ section.settings.icon_3 }}
+                            </span>
+                            {% endif %}
+
+                            <span class="policy-text">
+                                {% include 'multilang' with section.settings.text_3 %}
+                            </span>
+                        </a>
+                    </div>
+                </div>     
+            </div>
+            {% endif %}
+
+            {% if section.blocks.size > 0 %}
+            {% case section.blocks.size %}
+                {% when 1 %}
+                    {%- assign column_size = 'col-12' -%}
+                {% when 2 %}
+                    {%- assign column_size = 'col-12 col-md-6' -%}
+                {% when 3 %}
+                    {%- assign column_size = 'col-12 col-md-4' -%}
+                {% when 4 %}
+                    {%- assign column_size = 'col-12 col-md-3' -%}
+                {% when 5 %}
+                    {%- assign column_size = 'col-12 col-md-4 col-lg20 col5' -%}
+            {% endcase %}
+
+            <div class="row">
+                {% for block in section.blocks %}
+
+                {% if block.type == 'footer_link' %}
+                <div class="col-footer {{ column_size }}">
+                    {% if block.settings.footer_title != blank %}
+                    <h3 class="foot-title dropdow-mb">
+                        {% include 'multilang' with block.settings.footer_title %}
+                    </h3>
+                    {% endif %}
+                    
+                    {%- assign footer_linklist = block.settings.footer_linklist -%}
+                    
+                    {% if linklists[footer_linklist].links.size > 0 %}
+                    <ul>
+                        {% for link in linklists[footer_linklist].links %}
+                        <li>
+                            <a href="{{ link.url}}" title="{{ link.title }}" class="foot-link">
+                                {% include 'multilang' with link.title %}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+              
+                {% elsif block.type == 'info_store' %}
+                <div class="col-footer {{ column_size }}">
+                    {% if block.settings.footer_logo != blank %}
+                    <h3 class="foot-title">
+                        <a href="/" class="logo-ft">
+                            <img src="{{ block.settings.footer_logo | img_url:'master' }}">            
+                        </a>
+                    </h3>
+                    {% endif %}
+
+                    {% if block.settings.footer_info_store != blank %}
+                    <div class="location_info">
+                        {% if settings.enable_multilang %}
+                        <div class="lang1">
+                            {{ block.settings.footer_info_store | split: '[lang2]' | first }}
+                        </div>
+                        <div class="lang2">
+                            {{ block.settings.footer_info_store | split: '[lang2]' | last }}
+                        </div>
+                        {% else %}
+                        <div>
+                            {{ block.settings.footer_info_store | split: '[lang2]' | first }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}              
+                </div>
+                {% endif %}
+                {% endfor %} 
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if section.settings.footer_newsletter_enable or section.settings.footer_social_enable or section.settings.footer_address_code != blank or section.settings.show_payment_icons %}
+    <div class="footer-bottom">
+        <div class="container">
+            {% if section.settings.footer_newsletter_enable or section.settings.footer_social_enable %}
+            <div class="row{% if section.settings.footer_newsletter_enable and section.settings.footer_social_enable %} justify-content-md-between{% endif %}">
+                {% if section.settings.footer_newsletter_enable %}
+                <div class="col-12{% if section.settings.footer_social_enable %} col-md-8 col-lg-6{% endif %}">
+                    <div class="footer-newsletter text-left">
+                        {% if section.settings.footer_newsletter_title != blank %}
+                        <h3 class="newsletter-title">
+                            {% include 'multilang' with section.settings.footer_newsletter_title %}
+                        </h3>
+                        {% endif %}
+                        
+                        {% include 'homepage-block-newsletter' %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if section.settings.footer_social_enable %}
+                <div class="col-12{% if section.settings.footer_newsletter_enable %} col-md-4 col-lg-6{% endif %}">
+                    <div class="footer-social text-left">
+                        <div class="groups-block">
+                            {% include 'social-media' %} 
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            {% if section.settings.footer_address_code != blank or section.settings.show_payment_icons %}
+
+            {% endif %}
+            <div class="row">
+                <div class="col-12">
+                  
+                  	<ul class="inline-list payment-icons footer__section">
+                       <li class="icon--payment">
+                          <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-american_express">
+                             <title id="pi-american_express">American Express</title>
+                             <g fill="none">
+                                <path fill="#000" d="M35,0 L3,0 C1.3,0 0,1.3 0,3 L0,21 C0,22.7 1.4,24 3,24 L35,24 C36.7,24 38,22.7 38,21 L38,3 C38,1.3 36.6,0 35,0 Z" opacity=".07"></path>
+                                <path fill="#006FCF" d="M35,1 C36.1,1 37,1.9 37,3 L37,21 C37,22.1 36.1,23 35,23 L3,23 C1.9,23 1,22.1 1,21 L1,3 C1,1.9 1.9,1 3,1 L35,1"></path>
+                                <path fill="#FFF" d="M8.971,10.268 L9.745,12.144 L8.203,12.144 L8.971,10.268 Z M25.046,10.346 L22.069,10.346 L22.069,11.173 L24.998,11.173 L24.998,12.412 L22.075,12.412 L22.075,13.334 L25.052,13.334 L25.052,14.073 L27.129,11.828 L25.052,9.488 L25.046,10.346 L25.046,10.346 Z M10.983,8.006 L14.978,8.006 L15.865,9.941 L16.687,8 L27.057,8 L28.135,9.19 L29.25,8 L34.013,8 L30.494,11.852 L33.977,15.68 L29.143,15.68 L28.065,14.49 L26.94,15.68 L10.03,15.68 L9.536,14.49 L8.406,14.49 L7.911,15.68 L4,15.68 L7.286,8 L10.716,8 L10.983,8.006 Z M19.646,9.084 L17.407,9.084 L15.907,12.62 L14.282,9.084 L12.06,9.084 L12.06,13.894 L10,9.084 L8.007,9.084 L5.625,14.596 L7.18,14.596 L7.674,13.406 L10.27,13.406 L10.764,14.596 L13.484,14.596 L13.484,10.661 L15.235,14.602 L16.425,14.602 L18.165,10.673 L18.165,14.603 L19.623,14.603 L19.647,9.083 L19.646,9.084 Z M28.986,11.852 L31.517,9.084 L29.695,9.084 L28.094,10.81 L26.546,9.084 L20.652,9.084 L20.652,14.602 L26.462,14.602 L28.076,12.864 L29.624,14.602 L31.499,14.602 L28.987,11.852 L28.986,11.852 Z"></path>
+                             </g>
+                          </svg>
+                       </li>
+                       <li class="icon--payment">
+                          <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-master">
+                             <title id="pi-master">Mastercard</title>
+                             <path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path>
+                             <path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path>
+                             <circle fill="#EB001B" cx="15" cy="12" r="7"></circle>
+                             <circle fill="#F79E1B" cx="23" cy="12" r="7"></circle>
+                             <path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"></path>
+                          </svg>
+                       </li>
+                       <li class="icon--payment">
+                          <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" width="38" height="24" role="img" aria-labelledby="pi-paypal">
+                             <title id="pi-paypal">PayPal</title>
+                             <path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path>
+                             <path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path>
+                             <path fill="#003087" d="M23.9 8.3c.2-1 0-1.7-.6-2.3-.6-.7-1.7-1-3.1-1h-4.1c-.3 0-.5.2-.6.5L14 15.6c0 .2.1.4.3.4H17l.4-3.4 1.8-2.2 4.7-2.1z"></path>
+                             <path fill="#3086C8" d="M23.9 8.3l-.2.2c-.5 2.8-2.2 3.8-4.6 3.8H18c-.3 0-.5.2-.6.5l-.6 3.9-.2 1c0 .2.1.4.3.4H19c.3 0 .5-.2.5-.4v-.1l.4-2.4v-.1c0-.2.3-.4.5-.4h.3c2.1 0 3.7-.8 4.1-3.2.2-1 .1-1.8-.4-2.4-.1-.5-.3-.7-.5-.8z"></path>
+                             <path fill="#012169" d="M23.3 8.1c-.1-.1-.2-.1-.3-.1-.1 0-.2 0-.3-.1-.3-.1-.7-.1-1.1-.1h-3c-.1 0-.2 0-.2.1-.2.1-.3.2-.3.4l-.7 4.4v.1c0-.3.3-.5.6-.5h1.3c2.5 0 4.1-1 4.6-3.8v-.2c-.1-.1-.3-.2-.5-.2h-.1z"></path>
+                          </svg>
+                       </li>
+                       <li class="icon--payment">
+                          <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-visa">
+                             <title id="pi-visa">Visa</title>
+                             <path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path>
+                             <path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path>
+                             <path d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z" fill="#142688"></path>
+                          </svg>
+                       </li>
+                       <li class="icon--payment">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 38 24" width="38" class="undefined">
+                             <path d="m35 0h-32c-1.7 0-3 1.3-3 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3v-18c0-1.7-1.4-3-3-3z" fill="#b2fce4"></path>
+                             <path d="m27.4 6.8-2.7-1.6-2.7-1.6c-1.8-1-4.1.3-4.1 2.4v.4c0 .2.1.4.3.5l1.3.7c.4.2.8-.1.8-.5v-.8c0-.4.4-.7.8-.5l2.5 1.4 2.4 1.5c.4.2.4.7 0 .9l-2.5 1.4-2.5 1.6c-.4.2-.8-.1-.8-.5v-.4c0-2.1-2.3-3.4-4.1-2.4l-2.7 1.6-2.7 1.6c-1.8 1-1.8 3.7 0 4.7l2.7 1.6 2.7 1.6c1.8 1 4.1-.3 4.1-2.4v-.4c0-.2-.1-.4-.3-.5l-1.3-.7c-.4-.2-.8.1-.8.5v.8c0 .4-.4.7-.8.5l-2.5-1.4-2.5-1.5c-.4-.2-.4-.7 0-.9l2.5-1.4 2.5-1.4c.4-.2.8.1.8.5v.4c0 2.1 2.3 3.4 4.1 2.4l2.7-1.6 2.7-1.6c1.9-1.2 1.9-3.8.1-4.9z"></path>
+                          </svg>
+                       </li>
+                    </ul>
+
+                    {% if section.settings.footer_address_code != blank %}               
+                    <address class="text-center">
+                        {% if settings.enable_multilang %}
+                        <div class="lang1">
+                            {{ section.settings.footer_address_code | split: '[lang2]' | first }}
+                        </div>
+                        <div class="lang2">
+                            {{ section.settings.footer_address_code | split: '[lang2]' | last }}
+                        </div>
+                        {% else %}
+                        <div>
+                            {{ section.settings.footer_address_code | split: '[lang2]' | first }}
+                        </div>
+                        {% endif %}
+                    </address>
+                    {% endif %}
+
+                    {% if section.settings.show_payment_icons %}
+                    {% assign payment_string = 'visa,visa_electron,master,maestro,american_express,solo,amazon_payments,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,paypal,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,stripe,sage,wallet' %}
+                    {% assign methods = payment_string | split: ',' %}
+
+                    <ul class="payment-methods text-center">	
+                        {% for method in methods %}
+                        {%- assign display_current_method = method | prepend: 'payment_display_' -%}
+                        {% if section.settings[display_current_method] %}
+                        {%- assign current_method_icon = method | prepend: 'icon_' -%}
+                        <li>
+                            <img src="{{ section.settings[current_method_icon] | img_url: 'x32' }}" alt="{{ method }}">
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% endif %}               
+                </div>
+            </div>       
+        </div>
+    </div>
+    {% endif %}
+</footer>
+
+{% schema %}
+    {
+        "name": "Footer 03",
+        "max_blocks": 5,
+        "blocks": [	  
+            {
+                "type": "footer_link",
+                "name": "Footer Link",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "footer_title",
+                        "label": "Footer Title"
+                    },
+                    {
+                        "type": "link_list",
+                        "id": "footer_linklist",
+                        "label": "Footer Link",
+                        "default": "footer"
+                    }		  
+                ]
+            },
+            {
+                "type": "info_store",
+                "name": "Footer Store Location",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "footer_logo",
+                        "label": "Logo Footer"
+                    },
+                    {
+                        "type": "textarea",
+                        "id": "footer_info_store",
+                        "label": "Infor Store"
+                    }                      
+                ]
+            }
+        ],
+        "settings": [
+            {
+                "type": "header",
+                "content": "Footer Background"
+            },            
+            {
+                "type": "radio",
+                "id": "bg_footer_img",
+                "label": "Background image",
+                "options": [
+                    {
+                        "value": "bg-footer",
+                        "label": "Uploaded image"
+                    },
+                    {
+                        "value": "none",
+                        "label": "Solid color (no image)"
+                    }
+                ],
+                "default": "none"
+            },
+            {
+                "type": "color",
+                "id": "bg_footer_color",
+                "label": "Background color",
+                "default": "#232323"
+            },
+            {
+                "type": "radio",
+                "id": "bg_footer_position_x",
+                "label": "Horizontal position",
+                "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+                ]
+            },
+            {
+                "type": "radio",
+                "id": "bg_footer_position_y",
+                "label": "Vertical position",
+                "options": [
+                {
+                    "value": "top",
+                    "label": "Top"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+                {
+                    "value": "bottom",
+                    "label": "Bottom"
+                }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "bg_footer_repeat",
+                "label": "Repeat",
+                "options": [
+                {
+                    "value": "repeat",
+                    "label": "Horizontally and vertically"
+                },
+                {
+                    "value": "repeat-x",
+                    "label": "Horizontally only"
+                },
+                {
+                    "value": "repeat-y",
+                    "label": "Vertically only"
+                },
+                {
+                    "value": "no-repeat",
+                    "label": "Don't repeat"
+                }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "bg_footer_attachment",
+                "label": "Attachment",
+                "options": [
+                {
+                    "value": "scroll",
+                    "label": "Scroll"
+                },
+                {
+                    "value": "fixed",
+                    "label": "Fixed"
+                }
+                ]
+            },
+            {
+                "type": "image_picker",
+                "id": "bg-footer-img",
+                "label": "Upload a new image"
+            },      
+            {
+                "type": "header",
+                "content": "Text Color"
+            },
+            {
+                "type": "color",
+                "id": "footer_title_color",
+                "label": "Footer Title",
+                "default": "#fff"
+            },	  
+            {
+                "type": "color",
+                "id": "footer_link_color",
+                "label": "Footer Link",
+                "default": "#969696"
+            },
+            {
+                "type": "color",
+                "id": "footer_link_hover_color",
+                "label": "Footer Link Hover",
+                "default": "#969696"
+            },
+            {
+                "type": "color",
+                "id": "bg_footer_line_color",
+                "label": "Footer Line Color",
+                "default": "#2e2e2e"
+            }, 
+            {
+                "type": "header",
+                "content": "Footer Policies"
+            },
+            {
+                "type": "checkbox",
+                "id": "display_footer_policies",
+                "label" : "Display Policies Block?",
+                "default": true
+            },
+            {
+                "type": "color",
+                "id": "policies_border_color",
+                "label": "Policies Border Color",
+                "default": "#595959"
+            },
+            {
+                "type": "text",
+                "id" : "icon_1",
+                "label" : "Icon 1",
+                "info" : "[Find your Icon](https://fontawesome.com/v4.7.0/icons/)."
+            },
+            {
+                "type" : "text",
+                "id" : "text_1",
+                "label" : "text 1",
+                "default" : "Free Shipping on all orders *"
+            },
+            {
+                "type" : "url",
+                "id" : "link_1",
+                "label" : "Link 1"
+            },
+            {
+                "type": "text",
+                "id" : "icon_2",
+                "label" : "Icon 2",
+                "info" : "[Find your Icon](https://fontawesome.com/v4.7.0/icons/)."
+            },
+            {
+                "type" : "text",
+                "id" : "text_2",
+                "label" : "text 2",
+                "default" : "Free Shipping on all orders *"
+            },
+            {
+                "type" : "url",
+                "id" : "link_2",
+                "label" : "Link 2"
+            },
+            {
+                "type": "text",
+                "id" : "icon_3",
+                "label" : "Icon 3",
+                "info" : "[Find your Icon](https://fontawesome.com/v4.7.0/icons/)."
+            },
+            {
+                "type" : "text",
+                "id" : "text_3",
+                "label" : "text 3",
+                "default" : "Free Shipping on all orders *"
+            },
+            {
+                "type" : "url",
+                "id" : "link_3",
+                "label" : "Link 3"
+            },
+            {
+                "type": "header",
+                "content": "Social"
+            },
+            {
+                "type": "checkbox",
+                "id": "footer_social_enable",
+                "label": "Show social media links?",
+                "default": false
+            },  
+            {
+                "type": "color",
+                "id": "social_icon_color",
+                "label": "Social Icons Color",
+                "default": "#ffffff"
+            },                    
+            {
+                "type": "header",
+                "content": "Newsletter"
+            },
+            {
+                "type": "checkbox",
+                "id": "footer_newsletter_enable",
+                "label": "Show newsletter signup?",
+                "default": false
+            },
+            {
+                "type": "text",
+                "id": "footer_newsletter_title",
+                "label": "Footer Newsletter Title"
+            },
+            {
+                "type": "color",
+                "id": "bg_newsletter_color",
+                "label": "Newsletter Input Background Color",
+                "default": "#fff"
+            },
+            {
+                "type": "color",
+                "id": "newsletter_color",
+                "label": "Newsletter Input Color",
+                "default": "#919191"
+            },
+            {
+                "type": "color",
+                "id": "newsletter_border_color",
+                "label": "Newsletter Input Border Color",
+                "default": "#fff"
+            },
+            {
+                "type": "color",
+                "id": "bg_newsletter_button_color",
+                "label": "Background and Border Newsletter Button Color",
+                "default": "#595959"
+            },
+            {
+                "type": "color",
+                "id": "newsletter_button_color",
+                "label": "Newsletter Button Color",
+                "default": "#fff"
+            },               
+            {
+                "type": "header",
+                "content": "Footer Address"
+            },
+            {
+                "type": "color",
+                "id": "bg_footer_bottom_color",
+                "label": "Background Fotter Bottom",
+                "default": "#232323"
+            },
+            {
+                "type": "color",
+                "id": "footer_bottom_color",
+                "label": "Fotter Bottom Color",
+                "default": "#969696"
+            },
+            {
+                "type": "textarea",
+                "id": "footer_address_code",
+                "label": "Footer Address Code"
+            },           
+            {
+                "type": "header",
+                "content": "Footer Payment"
+            },
+                {
+                "type": "checkbox",
+                "id": "show_payment_icons",
+                "label": "Show payment icons",
+                "default": false
+            },
+            {
+                "type": "header",
+                "content": "Display payment icons for"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_visa",
+                "label": "Visa"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_visa_electron",
+                "label": "Visa Electron"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_american_express",
+                "label": "American Express"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_master",
+                "label": "Master"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_maestro",
+                "label": "Maestro"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_solo",
+                "label": "Solo"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_paypal",
+                "label": "Paypal"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_amazon_payments",
+                "label": "Amazon Payments"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_apple_pay",
+                "label": "Apple Pay"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_bitcoin",
+                "label": "Bitcoin"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_cirrus",
+                "label": "Cirrus"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_dankort",
+                "label": "Dankort"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_diners_club",
+                "label": "Diners Club"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_discover",
+                "label": "Discover"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_dogecoin",
+                "label": "Dogecoin"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_dwolla",
+                "label": "Dwolla"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_forbrugsforeningen",
+                "label": "Forbrugsforeningen"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_interac",
+                "label": "Interac"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_jcb",
+                "label": "JCB"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_litecoin",
+                "label": "Litecoin"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_stripe",
+                "label": "Stripe"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_sage",
+                "label": "Sage"
+            },
+            {
+                "type": "checkbox",
+                "id": "payment_display_wallet",
+                "label": "Google Wallet"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_visa",
+                "label": "Visa image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_visa_electron",
+                "label": "Visa Electron image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_master",
+                "label": "Master image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_american_express",
+                "label": "American Express image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_maestro",
+                "label": "Maestro image"
+            },
+            
+            {
+                "type": "image_picker",
+                "id": "icon_solo",
+                "label": "Solo image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_paypal",
+                "label": "Paypal image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_amazon_payments",
+                "label": "Amazon Payments image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_apple_pay",
+                "label": "Apple Pay image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_bitcoin",
+                "label": "Bitcoin image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_cirrus",
+                "label": "Cirrus image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_dankort",
+                "label": "Dankort image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_diners_club",
+                "label": "Diners Club image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_discover",
+                "label": "Discover image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_dogecoin",
+                "label": "Dogecoin image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_dwolla",
+                "label": "Dwolla image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_forbrugsforeningen",
+                "label": "Forbrugsforeningen image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_interac",
+                "label": "Interac image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_jcb",
+                "label": "JCB image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_litecoin",
+                "label": "Litecoin image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_stripe",
+                "label": "Stripe image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_sage",
+                "label": "Sage image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_wallet",
+                "label": "Google Wallet image"
+            }
+        ]	
+    }
+{% endschema %}

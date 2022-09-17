@@ -1,0 +1,143 @@
+<div class="brands-page">
+  <div class="container">
+    {% include 'breadcrumb' %}
+    
+    <header class="page-header">
+      <h1>
+        {% include 'multilang' with page.title %}
+      </h1>  
+
+    </header>
+    {% if settings.list_collections_layout == 'collections_full' %}
+<div class="bg-breddcrumb">
+    <div class="container-padd60">
+    {% include 'breadcrumb' %}
+    </div>
+</div>
+{% endif %}
+
+<div class="{% if settings.list_collections_layout == 'collections_full' %}container-padd60{% else %}container{% endif %}">
+    {% unless settings.list_collections_layout == 'collections_full' %}
+    {% endunless %}
+    
+<h5><li><a href="https://localthreads.com.au/collections/womens-clothing">Ethical Womens Clothing</a>: Womens Clothing Brands Australia</li>
+<li><a href="https://localthreads.com.au/collections/new-arrivals">Men's New Arrivals Clothes</a>: Mens Clothing Australian Brands</li>
+<li><a href="https://localthreads.com.au/collections/spring-is-here">Spring Dresses</a>: Outfits For The Spring 2022</li>
+</h5>
+        <h3 {% if settings.enable_multilang %}data-translate="collections.general.title"{%endif%}>
+        <a href="https://localthreads.com.au/pages/mens">Men's</a> & <a href="https://localthreads.com.au/pages/womens">Women's</a> Ethical Clothing {{ 'collections.general.title' | t }}
+        </h3>
+            LocalThreads: The Best Sustainable And Ethical Clothing, Australian Independent Clothing Brands Marketplace.</br>
+    <b>SHOP BY CATEGORY:</b></br>
+<li><b><a href="https://localthreads.com.au/collections/mens-clothing/">Mens Clothing</a>:</b> <a href="https://localthreads.com.au/collections/mens-singlets/">Singlets</a>, <a href="https://localthreads.com.au/collections/mens-hoodies-crewnecks/">Hoodies Crewnecks</a>, <a href="https://localthreads.com.au/collections/mens-jackets/">Jackets</a>, <a href="https://localthreads.com.au/collections/mens-tees-shirts/">T-shirts</a>, <a href="https://localthreads.com.au/collections/mens-pants-jeans/">Jeans</a>, <a href="https://localthreads.com.au/collections/mens-swimwear/">Swimwear</a>, <a href="https://localthreads.com.au/collections/mens-accessories/">Accessories</a>, <a href="https://localthreads.com.au/collections/mens-jewellery/">Jewellery</a>.</li>
+<li>  <b><a href="https://localthreads.com.au/collections/womens-clothing/">Womens Clothing</a>:</b> <a href="https://localthreads.com.au/collections/womens-jackets-coats-cardigans/">Jacket Coat & Catdigans</a>, <a href="https://localthreads.com.au/collections/womens-dresses-skirts/">Dresses & Skirts</a>, <a href="https://localthreads.com.au/collections/womens-swimwear/">Swimwear</a>, <a href="https://localthreads.com.au/collections/womens-tops/">Tops</a>, <a href="https://localthreads.com.au/collections/womens-pants-jeans/">Pants & Jeans</a>, <a href="https://localthreads.com.au/collections/womens-bags/">Womens Bags</a>.</li>
+<li><a href="https://localthreads.com.au/collections/baby-wear/">Baby Wear</a></li> <li><a href="https://localthreads.com.au/collections/homewares/">Homewares</a></li>Add to your kid’s clothing lineup with baby bodysuits, dresses, jumpers, leggings and more. With a stylish selection of clothes, and beauty products online, LocalThreads is your one-stop-shop for your fashion essentials.</br></br>
+ <h1>Affordable Australian Clothing Brands To Shop in 2022</h1>
+  Best Australian Clothing Brands To Have On Your Radar!  Shop the most famous brand in Australia, good australian clothing brands, womens clothing australia, mens clothing australia.
+   
+    {% if settings.list_collections_layout == 'collections_01_grid' %}
+    {% section 'list-collections-template' %}
+    
+    {% elsif settings.list_collections_layout == 'collections_02_list' %}
+    {% section 'list-collections-02-template' %}
+    
+    {% elsif settings.list_collections_layout == 'collections_3' %}
+    {% section 'list-collections-03-template' %}
+    
+    {% elsif settings.list_collections_layout == 'collections_mansory' %}
+    <div class="list-collections list-collections-mansory">
+        <div class="row">
+        {% section 'sidebar-section' %}
+        {% section 'list-collections_mansory-template' %}
+        </div>
+    </div> 
+    
+    {% elsif settings.list_collections_layout == 'collections_full' %}
+    <div class="list-collections list-collections-full">
+        <div class="row">
+        {% section 'sidebar-section' %}
+        {% section 'list-collections-full-template' %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% comment %}
+  This page represents the /collections and /products pages.
+  It is an optional, but highly recommended, template for your theme.
+  The contents of the list-collection.liquid template can be found in /sections/list-collection.liquid
+
+  More info:
+    - http://docs.shopify.com/manual/configuration/store-customization/taking-control-of-collections-listing
+{% endcomment %}
+    {% section 'm-brands-page' %}
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var brandsList = $('[data-brands-list]'),
+        brand = brandsList.find('.brand');
+
+    brand.each(function() {
+      var self = $(this),
+          brandTitle = self.find('.azbrands-title h3').text().trim(),
+          character = self.find("ul.brand-grid li:eq(0) a").text().charAt(0).toLowerCase(),
+          alphabet = brandsList.prev(),
+          alphabetChild = alphabet.children();
+
+      alphabetChild.each(function() {
+        var aElm = $(this).find('a');
+        
+        if(aElm.text().trim().toLowerCase() == brandTitle) {
+          if(!aElm.hasClass('readonly')) 
+            aElm.addClass('readonly');
+          return; 
+        }; 
+      });
+      if(!self.find('.azbrands-title').length) {
+        console.log(character)
+        self.find('.brand-grid').children().appendTo('.brand-' + character + " ul.brand-grid");
+        self.remove();
+      }      
+    });
+
+    var vendorItem = brandsList.prev().find('.vendor-letter a.readonly');
+    
+    vendorItem.on('click', function() {
+      var selfText = $(this).text().trim().toLowerCase();
+      
+      brand.hide().filter(function(e){
+        var title =  $(this).find('.azbrands-title h3').text().trim().toLowerCase();
+        
+        if(title == selfText) {
+          $(this).show();          
+          return;
+        };        
+      });
+      
+      $('.azbrandstable .all-brand a').click(function(){
+        brand.show();
+      });
+    });
+    
+    var allVendor = brandsList.prev().find('a.readonly');
+    
+    allVendor.on('click', function() {
+      brandsList.prev().find('a').removeClass('active');
+      
+      var self = $(this);
+      
+      if(!self.hasClass('active')) {
+      	self.addClass('active');
+      };
+      
+      var offsetTop = brandsList.prev('.azbrandstable').offset().top;
+      
+      $('body,html').animate({
+        scrollTop: offsetTop
+      }, 600);
+    });            
+  });
+
+</script>

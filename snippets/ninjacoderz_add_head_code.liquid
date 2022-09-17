@@ -1,0 +1,66 @@
+{%- assign pageTitle = page_title | strip_tags -%}
+{%- assign pageDescription = page_title | strip_tags -%}
+{%- if shop.metafields.ninja_head_code.store != blank -%}
+	{{ shop.metafields.ninja_head_code.store | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+{%- endif -%}
+{%- if request.page_type == 'product' -%}
+    {%- if shop.metafields.ninja_head_code.products_head != blank -%}
+        {{ shop.metafields.ninja_head_code.products_head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', product.id }}
+    {%- endif -%}
+
+    {%- if product.metafields.ninja_head_code.head != blank -%}
+        {{ product.metafields.ninja_head_code.head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', product.id }}
+    {%- endif -%}
+
+    {%- for collection in product.collections -%}
+      {%- if collection.metafields.ninja_head_code.head_products != blank -%}
+		{{ collection.metafields.ninja_head_code.head_products | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', product.id }}
+      {%- endif -%}
+    {%- endfor -%}
+{%- endif -%}
+{%- if request.page_type == 'collection' -%}
+    {%- if shop.metafields.ninja_head_code.collections_head != blank -%}
+        {{ shop.metafields.ninja_head_code.collections_head  | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', collection.id}}
+    {%- endif -%}
+
+    {%- if collection.metafields.ninja_head_code.head != blank -%}
+        {{ collection.metafields.ninja_head_code.head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', collection.id }}
+    {%- endif -%}
+{%- endif -%}
+{%- if request.page_type == 'page' -%}
+    {%- if shop.metafields.ninja_head_code.pages_head != blank -%}
+        {{ shop.metafields.ninja_head_code.pages_head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', page.id }}
+    {%- endif -%}
+
+    {%- if page.metafields.ninja_head_code.head != blank -%}
+        {{ page.metafields.ninja_head_code.head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', page.id }}
+    {%- endif -%}
+{%- endif -%}
+{%- if request.page_type == 'blog' -%}
+    {%- if shop.metafields.ninja_head_code.blogs_head != blank -%}
+        {{ shop.metafields.ninja_head_code.blogs_head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', blog.id }}
+    {%- endif -%}
+
+    {%- if blog.metafields.ninja_head_code.head != blank -%}
+        {{ blog.metafields.ninja_head_code.head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', blog.id }}
+    {%- endif -%}
+{%- endif -%}
+{%- if request.page_type == 'article' -%}
+    {%- if shop.metafields.ninja_head_code.articles_head != blank -%}
+        {{ shop.metafields.ninja_head_code.articles_head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', article.id }}
+    {%- endif -%}
+
+    {%- if article.metafields.ninja_head_code.head != blank -%}
+        {{ article.metafields.ninja_head_code.head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url | replace: '##id##', article.id }}
+    {%- endif -%}
+{%- endif -%}
+{%- if request.page_type == 'index' -%}
+    {%- if shop.metafields.ninja_head_code.home != blank -%}
+        {{ shop.metafields.ninja_head_code.home | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+{%- endif -%}
+{%- if request.page_type == 'cart' -%}
+    {%- if shop.metafields.ninja_head_code.cart != blank -%}
+        {{ shop.metafields.ninja_head_code.cart | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+{%- endif -%}
