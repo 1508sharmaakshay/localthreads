@@ -27,9 +27,9 @@
                             <a class="animate-scale" href="{{ block.settings.link }}">
                                 {%- assign img_url = block.settings.image | img_url: 'original', crop: 'center' -%}
                                 {% if block.settings.image != blank %}
-                                <img data-src="{{ img_url }}"
+                                <img data-src="{{ block.settings.image | img_url: 'original', crop: 'center' }}"
                                     alt="{{ block.settings.image.alt | default: shop.name }}" itemprop="logo"
-                                    class="lazyautosizes lazyloaded" data-sizes="auto">
+                                    class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
                                 {% else %}
                                 <div class="not_img">
                                 585 x 485px

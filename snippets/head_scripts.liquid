@@ -1,6 +1,5 @@
-{{ 'jquery.min.js' | asset_url | script_tag }}
-{{ 'jquery-cookie.min.js' | asset_url | script_tag }}
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" defer></script>
 <script>
     window.ajax_cart = "{{ settings.ajax_popup_cart }}";
     window.money_format = "{{shop.money_format}}";//"{{ shop.money_with_currency_format }}";
@@ -38,6 +37,4 @@
     window.infinity_scroll_feature = {{ settings.infinity_scroll_feature }};
     window.newsletter_popup = {{ settings.display_popup_newsletter }};  
 </script>
-
-
 {% include 'translator' %}

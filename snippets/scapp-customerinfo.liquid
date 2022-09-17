@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ 'sca-pp.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'sca-pp.css' | asset_url }}">
  <script>
   {%if content_for_header contains "cdn.secomapp.com\/promotionpopup\/cdn" %}
 	SCAPPLive = {};
@@ -17,5 +17,4 @@
   SCAPPShop.customer.addresses = {{customer.addresses|json}};
   {% endif %}
   </script>
-{{ 'sca-pp-initial.js' | asset_url | script_tag }}
-  
+<script type="lazyload2" data-src="{{ 'sca-pp-initial.js' | asset_url }}"></script>

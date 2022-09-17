@@ -5,8 +5,8 @@
     <div class="header-logo logo-fixed">
         <a class="logo-img" href="/" title="Logo">
             <img data-src="{{ section.settings.logo_fix | img_url: 'master' }}" 
-                src="{{ section.settings.logo_fix | img_url: 'master' }}"
-                alt="{{ section.settings.logo_fix.alt | default: shop.name }}" itemprop="logo" class="lazyautosizes lazyloaded" data-sizes="auto">
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAQAAABeK7cBAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
+                alt="{{ section.settings.logo_fix.alt | default: shop.name }}" itemprop="logo" class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
         </a>
     </div>
     {% endif %}

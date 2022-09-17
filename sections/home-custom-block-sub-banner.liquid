@@ -4,9 +4,9 @@
         <div class="row">
             {% if section.settings.title != blank %}
             <div class="col-12">
-                <div class="widget-title{% if section.settings.title_style == 'style_2' %} not-before{% endif %}">   
+                <div class="widget-title{% if section.settings.title_style == 'style_2' %} not-before{% endif %}">
                     <h3 class="box-title">
-                        <span class="title"> 
+                        <span class="title">
                         {% include 'multilang' with section.settings.title %}
                         </span>
                     </h3>   
@@ -46,7 +46,7 @@
 
                                 <img data-src="{{ img_url }}"
                                     alt="{{ block.settings.image_1.alt | default: shop.name }}" itemprop="logo"
-                                    class="lazyautosizes lazyloaded" data-sizes="auto">
+                                    class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
 
                                 {% else %}
 
@@ -80,7 +80,7 @@
 
                                         <img data-src="{{ img_url }}"
                                              alt="{{ block.settings.image_2.alt | default: shop.name }}" itemprop="logo"
-                                            class="lazyautosizes lazyloaded" data-sizes="auto">
+                                            class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
 
                                         {% else %}
 
@@ -112,7 +112,7 @@
 
                                         <img data-src="{{ img_url }}"
                                             alt="{{ block.settings.image_3.alt | default: shop.name }}" itemprop="logo"
-                                            class="lazyautosizes lazyloaded" data-sizes="auto">
+                                            class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
 
                                         {% else %}
 
@@ -151,7 +151,7 @@
 
                                 <img data-src="{{ img_url }}"
                                     alt="{{ block.settings.image_1.alt | default: shop.name }}" itemprop="logo"
-                                    class="lazyautosizes lazyloaded" data-sizes="auto">
+                                    class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
 
                                 {% else %}
 
@@ -183,7 +183,7 @@
 
                                 <img data-src="{{ img_url }}"
                                     alt="{{ block.settings.image_2.alt | default: shop.name }}" itemprop="logo"
-                                    class="lazyautosizes lazyloaded" data-sizes="auto">
+                                    class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
 
                                 {% else %}
 
@@ -215,7 +215,7 @@
 
                                 <img data-src="{{ img_url }}"
                                     alt="{{ block.settings.image_3.alt | default: shop.name }}" itemprop="logo"
-                                    class="lazyautosizes lazyloaded" data-sizes="auto">
+                                    class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
 
                                 {% else %}
 
@@ -247,7 +247,7 @@
 
                                 <img data-src="{{ img_url }}"
                                      alt="{{ block.settings.image_4.alt | default: shop.name }}" itemprop="logo"
-                                    class="lazyautosizes lazyloaded" data-sizes="auto">
+                                    class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
 
                                 {% else %}
 
@@ -279,7 +279,7 @@
 
                                 <img data-src="{{ img_url }}"
                                     alt="{{ block.settings.image_5.alt | default: shop.name }}" itemprop="logo"
-                                    class="lazyautosizes lazyloaded" data-sizes="auto">
+                                    class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
 
                                 {% else %}
 

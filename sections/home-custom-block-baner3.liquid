@@ -28,8 +28,8 @@
                                 {%- assign img_url = block.settings.image | img_url: 'original', crop: 'center' -%}
                                 {% if block.settings.image != blank %}
                                 <img data-src="{{ img_url }}"
-                                    src="{{ img_url }}" alt="{{ block.settings.image.alt | default: shop.name }}" itemprop="logo"
-                                    class="lazyautosizes lazyloaded" data-sizes="auto">
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAQAAABeK7cBAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII=" alt="{{ block.settings.image.alt | default: shop.name }}" itemprop="logo"
+                                    class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
                                 {% else %}
                                 <div class="not_img">
                                 585 x 485px

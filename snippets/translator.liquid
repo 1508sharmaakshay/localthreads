@@ -1,6 +1,5 @@
-{{ 'lang2.js' | asset_url | script_tag }}
-
-<script>
+<script type="lazyload2" data-src="{{ 'lang2.js' | asset_url }}"></script>
+<script type="lazyload2">
     var translator = {
         current_lang : $.cookie('language'),
         
@@ -160,7 +159,7 @@
             
     translator.init();
             
-    $(document).ready(function() {    
+    setTimeout(function() {    
         $('#lang-switcher [data-value]').on('click', function(e) {
         e.preventDefault();
         

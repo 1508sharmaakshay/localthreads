@@ -34,8 +34,8 @@
               {%- assign img_url = block.settings.image | img_url: '300x', crop: 'center' -%}
 
               <img data-src="{{ img_url }}"
-                   src="{{ img_url }}" alt="{{ block.settings.image.alt | default: shop.name }}" itemprop="logo"
-                   class="lazyautosizes lazyloaded" data-sizes="auto">
+                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAQAAABeK7cBAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII=" alt="{{ block.settings.image.alt | default: shop.name }}" itemprop="logo"
+                   class="lazyautosizes lazyloaded lazy2" data-sizes="auto">
 
               {% else %}
 
